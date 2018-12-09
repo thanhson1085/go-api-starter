@@ -7,7 +7,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/thanhson1085/api-starter/config"
+	"github.com/thanhson1085/go-api-starter/config"
 )
 
 func main() {
