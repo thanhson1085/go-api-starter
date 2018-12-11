@@ -7,8 +7,9 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/thanhson1085/api-starter/config"
-	"github.com/thanhson1085/api-starter/controllers"
+	"github.com/thanhson1085/go-api-starter/config"
+	"github.com/thanhson1085/go-api-starter/controllers"
+	db "github.com/thanhson1085/go-api-starter/models"
 )
 
 func main() {
@@ -19,6 +20,7 @@ func main() {
 	}
 	flag.Parse()
 	config.Init(*env)
+	db.Init()
 
 	// Set the router as the default one shipped with Gin
 	router := gin.Default()
@@ -42,5 +44,5 @@ func main() {
 	// Start and run the server
 
 	config := config.GetConfig()
-	router.Run(":" + config.GetString("port"))
+	router.Run(":" + config.GetString("server.port"))
 }
