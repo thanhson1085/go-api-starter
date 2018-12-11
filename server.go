@@ -8,6 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/thanhson1085/api-starter/config"
+	"github.com/thanhson1085/api-starter/controllers"
 )
 
 func main() {
@@ -17,7 +18,6 @@ func main() {
 		os.Exit(1)
 	}
 	flag.Parse()
-	fmt.Println(*env)
 	config.Init(*env)
 
 	// Set the router as the default one shipped with Gin
@@ -31,11 +31,16 @@ func main() {
 				"message": "pong",
 			})
 		})
+
+		userGroup := api.Group("/user")
+		{
+			user := new(controllers.UserController)
+			userGroup.GET("/", user.Get)
+		}
 	}
 
 	// Start and run the server
 
 	config := config.GetConfig()
-	fmt.Println(config.GetString("port"))
 	router.Run(":" + config.GetString("port"))
 }
